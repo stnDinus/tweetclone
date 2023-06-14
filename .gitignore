@@ -99,6 +99,9 @@ node_modules/
 # IDE / Development Files
 #-------------------------
 
+# php-cs-fixer (formatter for neovim)
+.php-cs-fixer.cache
+
 # Modules Testing
 _modules/*
 

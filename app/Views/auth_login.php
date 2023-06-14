@@ -6,6 +6,24 @@ helper('form');
 $validation = \Config\Services::validation();
 ?>
 <div class="row" style="margin-top: 100px; margin-bottom: 100px;">
+    <!-- Awal koding tambahan notifikasi -->
+    <?php
+    $sess = session();
+    if($sess->get('logout') == 'success'){
+        echo '<div class="alert alert-success" role="alert">
+            Berhasil logout. Silahkan login kembali.
+            </div>';
+    }
+
+    $err_login = $sess->get('login_error');
+    if($err_login){
+        echo '<div class="alert alert-danger" role="alert">
+            '.$err_login.'
+            </div>';
+    }
+    ?>
+    <!-- Akhir koding tambahan notifikasi -->
+    <div class="col-md-6 offset-md-3 align-self-center">
     <div class="col-md-6 offset-md-3 align-self-center">
     <div class="card">
         <div class="card-header text-white bg-dark">
