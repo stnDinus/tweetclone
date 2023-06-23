@@ -5,7 +5,7 @@
 <div class="row" style="margin-top: 100px; margin-bottom: 100px;">
     <div class="col-md-6 offset-md-3 align-self-center">
     <div class="card">
-        <div class="card-header bg-info">
+        <div class="card-header bg-info text-dark">
             <strong>Tweet Baru</strong>
         </div>
         <div class="card-body">
