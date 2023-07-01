@@ -76,7 +76,7 @@ class Auth extends BaseController
     $userMdl = new UserModel();
     $profile = $userMdl->find($userId);
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if ($this->request->is("get")) {
       return view('edit_profile', ['profile' => $profile]);
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($this->validate($userMdl->updateRules)) {
