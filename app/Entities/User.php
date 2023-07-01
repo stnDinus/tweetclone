@@ -6,10 +6,9 @@ use CodeIgniter\Entity\Entity;
 
 class User extends Entity
 {
-    public function setPassword(string $pass)
-    {
-        $this->attributes['password'] = password_hash($pass, PASSWORD_BCRYPT);
-        return $this;
-    }
-    
+  public function setPassword(string $pass)
+  {
+    $this->attributes['password'] = password_hash($pass, PASSWORD_BCRYPT);
+    return $this;
+  }
 }
