@@ -71,9 +71,9 @@ class Auth extends BaseController
 
     public function editProfile()
     {
-        $sess = session();
+        $userId = session()->get('currentuser')['userid'];
         $userMdl = new UserModel();
-        $profile = $userMdl->find($sess->get('currentuser')['userid']);
+        $profile = $userMdl->find($userId);
 
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
           return view('edit_profile', ['profile'=>$profile]);
@@ -81,10 +81,10 @@ class Auth extends BaseController
         } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if ($this->validate($userMdl->updateRules)) {
             $userMdl->updateUser(
-              $sess->get('currentuser')['userid'],
+              $userId,
               $this->request->getPost(),
             );
-            $profile = $userMdl->find($sess->get('currentuser')['userid']);
+            $profile = $userMdl->find($userId);
             return view('edit_profile', ['profile'=>$profile, 'success'=>true]);
 
           } else {
