@@ -53,10 +53,10 @@ class UserModel extends Model
   public function updateUser($id, $data)
   {
     $this->setAllowedFields(["fullname", "password"]);
-    if (!empty($data['password'])) {
-      $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-    } else {
+    if (empty($data['password'])) {
       unset($data['password']);
+    } else {
+      $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
     }
     $this->update($id, $data);
   }
