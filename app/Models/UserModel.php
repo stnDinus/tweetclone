@@ -24,6 +24,12 @@ class UserModel extends Model
         'password' => 'required'
     ];
 
+    public $updateRules = [
+        'fullname' => 'permit_empty|min_length[5]',
+        'password' => 'permit_empty|min_length[8]',
+        'confirmation' => 'required_with[password]|matches[password]',
+    ];
+
     public function addUser($data)
     {
         $user = new \App\Entities\User();
@@ -42,5 +48,15 @@ class UserModel extends Model
         } else {
             return false;
         }
+    }
+
+    public function updateUser($id, $data)
+    {
+        if (!empty($data['password'])) {
+          $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        } else {
+          unset($data['password']);
+        }
+        $this->update($id, $data);
     }
 }

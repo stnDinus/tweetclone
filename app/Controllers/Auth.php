@@ -68,4 +68,28 @@ class Auth extends BaseController
         $sess->setFlashdata('logout', 'success');
         return redirect()->to('/auth');
     }
+
+    public function editProfile()
+    {
+        $sess = session();
+        $userMdl = new UserModel();
+        $profile = $userMdl->find($sess->get('currentuser')['userid']);
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+          return view('edit_profile', ['profile'=>$profile]);
+
+        } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          if ($this->validate($userMdl->updateRules)) {
+            $userMdl->updateUser(
+              $sess->get('currentuser')['userid'],
+              $this->request->getPost(),
+            );
+            $profile = $userMdl->find($sess->get('currentuser')['userid']);
+            return view('edit_profile', ['profile'=>$profile, 'success'=>true]);
+
+          } else {
+            return view('edit_profile', ['profile'=>$profile, 'validation'=>$this->validator]);
+          }
+        }
+    }
 }

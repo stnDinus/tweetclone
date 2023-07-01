@@ -46,6 +46,8 @@ $routes->post('/edit', 'Tweet::editTweet', ['filter'=>'cekLogin']);
 $routes->post('/add_user', 'Auth::addUser');
 $routes->post('/login', 'Auth::login');
 
+$routes->match(['get', 'post'], '/edit_profile', 'Auth::editProfile', ['filter'=>'cekLogin']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
