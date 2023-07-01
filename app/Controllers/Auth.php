@@ -78,7 +78,8 @@ class Auth extends BaseController
 
     if ($this->request->is("get")) {
       return view('edit_profile', ['profile' => $profile]);
-    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    } else if ($this->request->is("post")) {
       if ($this->validate($userMdl->updateRules)) {
         $userMdl->updateUser(
           $userId,
@@ -86,6 +87,7 @@ class Auth extends BaseController
         );
         $profile = $userMdl->find($userId);
         return view('edit_profile', ['profile' => $profile, 'success' => true]);
+
       } else {
         return view('edit_profile', ['profile' => $profile, 'validation' => $this->validator]);
       }
