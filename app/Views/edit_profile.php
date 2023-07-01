@@ -7,6 +7,15 @@
 ?>
 <div class="row" style="margin-top: 100px; margin-bottom: 100px;">
     <div class="col-md-6 offset-md-3 align-self-center">
+    <?php
+      if (isset($success)) {
+        echo <<<HTML
+          <div class="alert alert-success" role="alert">
+            Profil anda telah tersimpan
+          </div>
+        HTML;
+      }
+    ?>
     <div class="card">
         <div class="card-header bg-info text-dark">
             <strong>Edit Profile</strong>
