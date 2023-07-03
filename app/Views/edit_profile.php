@@ -47,7 +47,6 @@ $validation = \Config\Services::validation();
         </div>
         <div class="mb-3">
           <input type="submit" class="btn btn-primary" value="Simpan">
-          <a href="<?= previous_url() ?>" class="btn btn-warning">Kembali</a>
         </div>
         <?= form_close() ?>
       </div>
