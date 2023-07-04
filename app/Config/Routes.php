@@ -29,24 +29,29 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Tweet::index', ['filter'=>'cekLogin']);
-$routes->get('/category/(:segment)', 'Tweet::category/$1', ['filter'=>'cekLogin']);
+$routes->get('/', 'Tweet::index', ['filter' => 'cekLogin']);
+$routes->get('/category/(:segment)', 'Tweet::category/$1', ['filter' => 'cekLogin']);
 
-$routes->get('/add', 'Tweet::addForm', ['filter'=>'cekLogin']);
-$routes->get('/edit/(:num)', 'Tweet::editForm/$1', ['filter'=>'cekLogin']);
+$routes->get('/add', 'Tweet::addForm', ['filter' => 'cekLogin']);
+$routes->get('/edit/(:num)', 'Tweet::editForm/$1', ['filter' => 'cekLogin']);
 
 $routes->get('/auth', 'Auth::index');
 $routes->get('/register', 'Auth::register');
 $routes->get('/logout', 'Auth::logout');
 
-$routes->post('/add', 'Tweet::addTweet', ['filter'=>'cekLogin']);
-$routes->get('/delete/(:num)', 'Tweet::delTweet/$1', ['filter'=>'cekLogin']);
-$routes->post('/edit', 'Tweet::editTweet', ['filter'=>'cekLogin']);
+$routes->post('/add', 'Tweet::addTweet', ['filter' => 'cekLogin']);
+$routes->get('/delete/(:num)', 'Tweet::delTweet/$1', ['filter' => 'cekLogin']);
+$routes->post('/edit', 'Tweet::editTweet', ['filter' => 'cekLogin']);
 
 $routes->post('/add_user', 'Auth::addUser');
 $routes->post('/login', 'Auth::login');
 
-$routes->match(['get', 'post'], '/edit_profile', 'Auth::editProfile', ['filter'=>'cekLogin']);
+$routes->match(['get', 'post'], '/edit_profile', 'Auth::editProfile', ['filter' => 'cekLogin']);
+
+$routes->post("/like/(:num)", "Likes::like/$1", ["filter" => "cekLogin"]);
+$routes->post("/unlike/(:num)", "Likes::unlike/$1", ["filter" => "cekLogin"]);
+$routes->get("/likes/user/(:num)", "Likes::getUserLikes/$1", ["filter" => "cekLogin"]);
+$routes->get("/likes/tweet/(:num)", "Likes::getTweetLikes/$1", ["filter" => "cekLogin"]);
 
 /*
  * --------------------------------------------------------------------
@@ -62,5 +67,5 @@ $routes->match(['get', 'post'], '/edit_profile', 'Auth::editProfile', ['filter'=
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

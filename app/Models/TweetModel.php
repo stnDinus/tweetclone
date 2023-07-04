@@ -29,18 +29,16 @@ class TweetModel extends Model
 
   public function getLatest()
   {
-    $query = $this->select('tweets.id, user_id, username, fullname, content, category, created_at')
+    return $this
       ->orderBy('created_at', 'desc')
-      ->join('users', 'users.id = tweets.user_id');
-    return $query->findAll();
+      ->findAll();
   }
 
   public function getByCategory($category)
   {
-    $query = $this->select('tweets.id, user_id, username, fullname, content, category, created_at')
+    return $this
       ->where('category', $category)->orderBy('created_at', 'desc')
-      ->join('users', 'users.id = tweets.user_id');;
-    return $query->findAll();
+      ->findAll();
   }
 
   public function editTweet($post)

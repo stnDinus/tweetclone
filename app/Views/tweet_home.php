@@ -72,36 +72,7 @@
   </div>
   <div class="col-md-8">
     <h2><?= $judul ?></h2>
-
-    <?php foreach ($tweets as $tweet) { ?>
-      <div class="row" style="border-top: 1px solid #eee; padding-top: 10px; margin-bottom: 10px;">
-        <div class="col-sm-2">
-          <?= img(['src' => 'images/no-avatar.jpg', 'class' => 'img-thumbnail']) ?>
-        </div>
-        <div class="col-sm-10">
-          <h4><?= $tweet->fullname ?> <small>@<?= $tweet->username ?></small></h4>
-          <div class="mb-3">
-            <?= $tweet->content ?>
-          </div>
-          <div class="container-fluid">
-            <span>
-              <a href="<?= base_url('/category//' . $tweet->category) ?>">#<?= $tweet->category ?></a>
-              <small><?= $tweet->getCreatedAt() ?></small>
-            </span>
-            <?php
-            $sess = session();
-            $curUser = $sess->get('currentuser');
-            if ($curUser['userid'] == $tweet->user_id) :
-            ?>
-              <span>
-                <a href="<?= base_url('/edit//' . $tweet->id) ?>" class="btn btn-sm btn-warning">E</a>
-                <a href="<?= base_url('/delete//' . $tweet->id) ?>" class="btn btn-sm btn-danger">D</a>
-              </span>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
-    <?php } ?>
+    <?= view("components/tweets", ["tweets" => $tweets]) ?>
   </div>
 </div>
 <?= $this->endSection() ?>
