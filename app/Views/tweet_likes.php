@@ -20,7 +20,7 @@ if ($tweet == null) {
     foreach ($users as $user) {
       echo "
       <li class=\"list-group-item d-flex flex-col align-items-center\">
-        <img src=\"{$base_url}images/no-avatar.jpg\" class=\"img-thumbnail\" style=\"width: 3.3rem;\">
+        <img src=\"{$user->avatar_url}\" class=\"img-thumbnail\" style=\"width: 3.3rem;\">
         <div class=\"ms-2\">
           <div>$user->fullname</div>
           <span class=\"text-secondary\">@id$user->username</span>
