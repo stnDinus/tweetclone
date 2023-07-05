@@ -64,6 +64,9 @@ writable/debugbar/*
 
 php_errors.log
 
+public/images/avatars/*
+!public/images/avatars/no-avatar.webp
+
 #-------------------------
 # User Guide Temp Files
 #-------------------------

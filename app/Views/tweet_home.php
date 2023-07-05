@@ -40,9 +40,7 @@
   <div class="col-md-4">
     <div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
-        <div class="col-md-4">
-          <?= img(['src' => 'images/no-avatar.jpg', 'class' => 'img-fluid rounded-start']) ?>
-        </div>
+        <?= img(['src' => "$profile->avatar_url", 'class' => 'col-md-4 object-fit-contain bg-black rounded-start']) ?>
         <div class="col-md-8">
           <div class="card-body">
             <p>

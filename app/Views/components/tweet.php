@@ -7,7 +7,7 @@ $likes      = "<a href=\"{$base_url}likes/tweet/$tweet->id\" class=\"btn btn-sm 
 
 <div class="row border-top border-dark-tertiary my-3 py-3">
   <div class="col-sm-2">
-    <?= img(['src' => 'images/no-avatar.jpg', 'class' => 'img-thumbnail']) ?>
+    <?= img(['src' => "$author->avatar_url", 'class' => 'img-thumbnail']) ?>
   </div>
   <div class="col-sm-10">
     <h4><?= $author->fullname ?> <small class="text-secondary">@<?= $author->username ?></small></h4>

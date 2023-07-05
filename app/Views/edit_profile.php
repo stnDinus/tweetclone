@@ -21,12 +21,28 @@ $validation = \Config\Services::validation();
         <strong>Edit Profile</strong>
       </div>
       <div class="card-body">
-        <?= form_open('/edit_profile') ?>
+        <?= form_open('/edit_profile', ["enctype" => "multipart/form-data"]) ?>
         <h5>Username</h5>
         <hr>
         <div class="mb-3">
           <input id="username" class="form-control" type="text" disabled value=<?= $profile->username ?>>
         </div>
+        <h5>Foto Profil</h5>
+        <hr>
+        <div class="mb-3 d-flex flex-column">
+          <img id="avatar" class="img img-thumbnail object-fit-cover mb-3 mx-auto" style="width: 320px; height: 320px" src="<?= $profile->avatar_url ?>">
+          <input type="file" name="avatar" class="form-control" accept="image/jpeg,image/png,image/webp">
+          <div style="color: red; font-size: small;"> <?= $validation->getError('avatar') ?> </div>
+          <script>
+            const avatarImage = document.querySelector("img#avatar");
+            const avatarInput = document.querySelector("input[name='avatar']");
+            avatarInput.addEventListener("change", e => {
+              const [image] = avatarInput.files;
+              if (image) avatarImage.src = URL.createObjectURL(image);
+            })
+          </script>
+        </div>
+
         <h5>Nama Lengkap</h5>
         <hr>
         <div class="mb-3">

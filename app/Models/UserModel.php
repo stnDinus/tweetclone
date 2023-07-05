@@ -28,6 +28,7 @@ class UserModel extends Model
     'fullname' => 'permit_empty|min_length[5]',
     'password' => 'permit_empty|min_length[8]',
     'confirmation' => 'required_with[password]|matches[password]',
+    'avatar' => 'max_size[avatar,2000]|mime_in[avatar,image/jpeg,image/png,image/webp]'
   ];
 
   public function addUser($data)
@@ -50,9 +51,20 @@ class UserModel extends Model
     }
   }
 
-  public function updateUser($id, $data)
+  public function updateUser($id, $request)
   {
-    $this->setAllowedFields(["fullname", "password"]);
+    $this->setAllowedFields(["fullname", "password", "avatar_url"]);
+    $data = $request->getPost();
+    $avatar = $request->getFile("avatar");
+    if ($avatar->isValid()) {
+      $data["avatar_url"] = hash("xxh128", $id);
+      $avatar->move("images/avatars/", $data["avatar_url"] . ".webp", true);
+      \Config\Services::image()
+        ->withFile("images/avatars/{$data['avatar_url']}.webp")
+        ->fit(320, 320, "center")
+        ->convert(IMAGETYPE_WEBP)
+        ->save("images/avatars/{$data['avatar_url']}.webp");
+    }
     if (empty($data['password'])) {
       unset($data['password']);
     } else {
