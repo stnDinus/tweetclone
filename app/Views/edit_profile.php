@@ -29,10 +29,11 @@ $validation = \Config\Services::validation();
         </div>
         <h5>Foto Profil</h5>
         <hr>
-        <div class="mb-3 d-flex flex-column">
-          <img id="avatar" class="img img-thumbnail object-fit-cover mb-3 mx-auto" style="width: 320px; height: 320px" src="<?= $profile->avatar_url ?>">
-          <input type="file" name="avatar" class="form-control" accept="image/jpeg,image/png,image/webp">
-          <div style="color: red; font-size: small;"> <?= $validation->getError('avatar') ?> </div>
+        <div class="mb-3 d-flex flex-column border rounded overflow-hidden mx-auto" style="width: fit-content;">
+          <img id="avatar" class="object-fit-cover border-bottom" style="width: 320px; height: 320px" src="<?= $profile->avatar_url ?>">
+          <label class="px-2 mt-2" for="avatar">Upload Gambar (< 2MB): </label>
+          <input class="px-2" type="file" id="avatar" name="avatar" accept="image/jpeg,image/png,image/webp">
+          <div class="mb-2" style="color: red; font-size: small;"> <?= $validation->getError('avatar') ?> </div>
           <script>
             const avatarImage = document.querySelector("img#avatar");
             const avatarInput = document.querySelector("input[name='avatar']");
