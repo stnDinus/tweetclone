@@ -51,13 +51,13 @@ class UserModel extends Model
     }
   }
 
-  public function updateUser($id, $request)
+  public function updateUser($profile, $request)
   {
     $this->setAllowedFields(["fullname", "password", "avatar_url"]);
     $data = $request->getPost();
     $avatar = $request->getFile("avatar");
     if ($avatar->isValid()) {
-      $data["avatar_url"] = hash("xxh128", $id);
+      $data["avatar_url"] = hash("xxh128", $profile->id);
       $avatar->move("images/avatars/", $data["avatar_url"] . ".webp", true);
       \Config\Services::image()
         ->withFile("images/avatars/{$data['avatar_url']}.webp")
@@ -67,9 +67,8 @@ class UserModel extends Model
     }
     if (empty($data['password'])) {
       unset($data['password']);
-    } else {
-      $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
     }
-    $this->update($id, $data);
+    $profile->fill($data);
+    $this->save($profile->toRawArray());
   }
 }

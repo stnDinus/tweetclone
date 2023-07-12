@@ -82,10 +82,9 @@ class Auth extends BaseController
     } else if ($this->request->is("post")) {
       if ($this->validate($userMdl->updateRules)) {
         $userMdl->updateUser(
-          $userId,
+          $profile,
           $this->request,
         );
-        $profile = $userMdl->find($userId);
         return view('edit_profile', ['profile' => $profile, 'success' => true]);
 
       } else {
