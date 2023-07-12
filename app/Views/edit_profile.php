@@ -48,7 +48,7 @@ $validation = \Config\Services::validation();
         <hr>
         <div class="mb-3">
           <input id="fullname" name="fullname" class="form-control" type="text" value="<?= $profile->fullname ?>">
-          <div style="color: red; font-size: small;"> <?= $validation->getError('fulname') ?> </div>
+          <div style="color: red; font-size: small;"> <?= $validation->getError('fullname') ?> </div>
         </div>
         <h5>Password</h5>
         <hr>
