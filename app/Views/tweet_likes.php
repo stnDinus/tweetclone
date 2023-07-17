@@ -23,7 +23,7 @@ if ($tweet == null) {
         <img src=\"{$user->avatar_url}\" class=\"img-thumbnail\" style=\"width: 3.3rem;\">
         <div class=\"ms-2\">
           <div>$user->fullname</div>
-          <span class=\"text-secondary\">@id$user->username</span>
+          <span class=\"text-secondary\">@$user->username</span>
         </div>
       </li>
       ";
